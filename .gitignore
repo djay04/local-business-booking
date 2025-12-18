@@ -1,0 +1,9 @@
+# Node / Next
+my-app/node_modules/
+my-app/.next/
+
+# Env files
+my-app/.env.local
+
+# OS
+.DS_Store
