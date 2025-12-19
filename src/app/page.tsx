@@ -25,9 +25,27 @@ export default function Home(){
       alert('Error')
     } else {
       alert('Inserted')
+
+        const postData = {
+        name: nameFromForm,
+        email: emailFromForm,
+        message: messageFromForm
+      }
+      
       setNameFromForm('')
       setEmailFromForm('')
       setMessageFromForm('')
+
+
+
+      fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postData)
+      }).then(response => response.json()).then(data => console.log(data)).catch(error => console.error('Error:', error))
+
     }
   }
 
