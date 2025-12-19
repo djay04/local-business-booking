@@ -1,10 +1,11 @@
 'use server'
 
 import { Resend } from 'resend'
+import { NextResponse } from 'next/server'
 
-export default function POST(request){
+export async function POST(request){
 
-    const { name, email, message} = request.json()
+    const { name, email, message} = await request.json()
 
     const resend = new Resend(process.env.RESEND_API_KEY)
 
