@@ -7,6 +7,7 @@ export default function Home(){
 
     const [leads, setLeads] = useState([])
     const [search, setSearch] = useState('')
+    const [searchStatus, setSearchStatus] = useState('')
 
     useEffect( () => {
 
@@ -31,6 +32,14 @@ export default function Home(){
                     </strong>
                 </h1>
                 <input value={search} onChange={(e) => setSearch(e.target.value)}></input>
+                <select value={searchStatus} onChange={(e) => {
+                    setSearchStatus(e.target.value)
+                }}>
+                    <option value="All">All</option>
+                    <option value="new">New</option>
+                    <option value="contacted">Contacted</option>
+                    <option value="closed">Closed</option>
+                </select>
                 <table>
                     <thead>
                     <tr>
@@ -43,8 +52,11 @@ export default function Home(){
                     </thead>
                     <tbody>
                     {leads.filter((lead) => {
+
+                        const matchesSearch = lead.name?.toLowerCase().includes(search) || lead.email?.toLowerCase().includes(search)
+                        const matchesStatus = lead.status === searchStatus || searchStatus === "All"
                         
-                        if (lead.name?.toLowerCase().includes(search) || lead.email?.toLowerCase().includes(search)){
+                        if (matchesSearch && matchesStatus){
                             return true
                         } else {
                             return false
