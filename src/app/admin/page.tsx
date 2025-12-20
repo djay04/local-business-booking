@@ -25,32 +25,41 @@ export default function Home(){
         fetchData()
     }, [])
 
-    return (<main>
-                <h1>
-                    <strong>
+    return (<main className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50 p-8">
+
+                <div className="max-w-6xl mx-auto">
+
+                {/* title */}
+                <h1 className="text-4xl font-bold text-amber-900 mb-8 text-center">
                         Admin View
-                    </strong>
                 </h1>
-                <input value={search} onChange={(e) => setSearch(e.target.value)}></input>
-                <select value={searchStatus} onChange={(e) => {
+
+                {/* White box for everything */}
+                <div className="bg-white p-8 rounded-lg shadow-lg text-amber-800 font-bold">
+                {/* Search and filter input */}
+                {/* Your table goes here */}
+                <div className="flex gap-4 mb-6">
+                    <input className="flex-1 p-3 border border-gray-300 rounded-lg" placeholder="Search by Name or Email" value={search} onChange={(e) => setSearch(e.target.value)}></input>
+                    <select className="w-48 p-3 border border-gray-300 rounded-lg" value={searchStatus} onChange={(e) => {
                     setSearchStatus(e.target.value)
-                }}>
-                    <option value="All">All</option>
-                    <option value="new">New</option>
-                    <option value="contacted">Contacted</option>
-                    <option value="closed">Closed</option>
+                    }}>
+                        <option value="All">All</option>
+                        <option value="new">New</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="closed">Closed</option>
                 </select>
-                <table>
+                </div>
+                <table className="w-full border-collapse">
                     <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Message</th>
-                        <th>Date</th>
-                        <th>Status</th>
+                    <tr className="font-bold text-amber-800"> 
+                        <th className="p-3 text-left border-b-2 border-gray-200">Name</th>
+                        <th className="p-3 text-left border-b-2 border-gray-200">Email</th>
+                        <th className="p-3 text-left border-b-2 border-gray-200">Message</th>
+                        <th className="p-3 text-left border-b-2 border-gray-200">Date</th>
+                        <th className="p-3 text-left border-b-2 border-gray-200">Status</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="font-bold text-amber-800">
                     {leads.filter((lead) => {
 
                         const matchesSearch = lead.name?.toLowerCase().includes(search) || lead.email?.toLowerCase().includes(search)
@@ -62,13 +71,13 @@ export default function Home(){
                             return false
                         }
                     }).map((lead) => {
-                        return (<tr key={lead.id}>
-                            <td>{lead.name}</td>
-                            <td>{lead.email}</td>
-                            <td>{lead.message}</td>
-                            <td>{lead.date}</td>
-                            <td>
-                                <select value={lead.status} onChange={async (e) => {
+                        return (<tr key={lead.id} className="rounded-lg shadow-lg">
+                            <td className="p-3 border-b border-gray-100">{lead.name}</td>
+                            <td className="p-3 border-b border-gray-100">{lead.email}</td>
+                            <td className="p-3 border-b border-gray-100">{lead.message}</td>
+                            <td className="p-3 border-b border-gray-100">{lead.date}</td>
+                            <td className="p-3 border-b border-gray-100">
+                                <select className="p-2 border border-gray-300 rounded bg-white" value={lead.status} onChange={async (e) => {
 
                                     const newStatus = e.target.value
 
@@ -102,7 +111,8 @@ export default function Home(){
                     )})}
                     </tbody>
                 </table>
-    
+        </div>
+    </div>
     </main>)
 
 }
