@@ -10,7 +10,7 @@ export default function Home(){
   const [messageFromForm, setMessageFromForm] = useState('')
   const [submittedForm, setSubmittedForm] = useState(false)
 
-  const addLead = async(e) => {
+  const addLead = async(e: any) => {
 
     e.preventDefault()
 
