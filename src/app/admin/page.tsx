@@ -5,7 +5,7 @@ import { supabase } from '@/lib/supabase'
 
 export default function Home(){
 
-    const [leads, setLeads] = useState([])
+    const [leads, setLeads] = useState<any[]>([])
     const [search, setSearch] = useState('')
     const [searchStatus, setSearchStatus] = useState('')
 
